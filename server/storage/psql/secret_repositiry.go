@@ -40,6 +40,7 @@ func (r *secretRepository) Add(ctx context.Context, secret model.Secret) (uuid.U
 	)
 
 	if err != nil {
+		log.Println(err.Error()) // log error before returning it
 		return uuid.Nil, err
 	}
 
@@ -77,17 +78,26 @@ func (r *secretRepository) Update(ctx context.Context, el model.Secret) error {
 
 	stmt, err := r.db.Prepare(query)
 	if err != nil {
+		log.Println(err.Error())
 		return err
 	}
 
 	res, err := stmt.ExecContext(ctx, el.ID, el.Ver, el.UserID, el.Data, el.IsDeleted)
 	if err != nil {
+		log.Println(err.Error())
 		return err
 	}
 
 	exists, err := res.RowsAffected()
+	if err != nil {
+		log.Println(err.Error())
+		return err
+	}
+
 	if exists == 0 {
-		return model.ErrorItemNotFound
+		err = model.ErrorItemNotFound
+		log.Println(err.Error())
+		return err
 	}
 
 	return nil
@@ -102,17 +112,26 @@ func (r *secretRepository) Delete(ctx context.Context, id uuid.UUID, userID uuid
 
 	stmt, err := r.db.Prepare(query)
 	if err != nil {
+		log.Println(err.Error())
 		return err
 	}
 
 	res, err := stmt.ExecContext(ctx, id, userID, true)
 	if err != nil {
+		log.Println(err.Error())
 		return err
 	}
 
 	exists, err := res.RowsAffected()
+	if err != nil {
+		log.Println(err.Error())
+		return err
+	}
+
 	if exists == 0 {
-		return model.ErrorItemNotFound
+		err = model.ErrorItemNotFound
+		log.Println(err.Error())
+		return err
 	}
 
 	return nil
