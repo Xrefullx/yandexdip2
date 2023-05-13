@@ -3,9 +3,11 @@ package services
 import (
 	"errors"
 	"fmt"
-	"github.com/Xrefullx/YanDip/client/model"
-	"github.com/google/uuid"
 	"log"
+
+	"github.com/google/uuid"
+
+	"github.com/Xrefullx/YanDip/client/model"
 )
 
 // uploads secret to server and updates local SecretID and version

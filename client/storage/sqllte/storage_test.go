@@ -2,10 +2,12 @@ package sqllte
 
 import (
 	"errors"
-	"github.com/Xrefullx/YanDip/client/model"
-	"github.com/Xrefullx/YanDip/client/pkg"
+
 	"github.com/google/uuid"
 	"github.com/icrowley/fake"
+
+	"github.com/Xrefullx/YanDip/client/model"
+	"github.com/Xrefullx/YanDip/client/pkg"
 )
 
 func (s *TestSuite) TestStorage_UpdateSecret() {

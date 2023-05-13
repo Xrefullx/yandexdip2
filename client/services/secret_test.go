@@ -1,14 +1,16 @@
 package services
 
 import (
+	"testing"
+
+	"github.com/golang/mock/gomock"
+	"github.com/stretchr/testify/assert"
+	"github.com/stretchr/testify/require"
+
 	"github.com/Xrefullx/YanDip/client/model"
 	"github.com/Xrefullx/YanDip/client/pkg"
 	"github.com/Xrefullx/YanDip/client/storage"
 	mk "github.com/Xrefullx/YanDip/client/storage/mock"
-	"github.com/golang/mock/gomock"
-	"github.com/stretchr/testify/assert"
-	"github.com/stretchr/testify/require"
-	"testing"
 )
 
 var cfg = pkg.Config{

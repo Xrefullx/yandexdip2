@@ -2,11 +2,13 @@ package handler
 
 import (
 	"encoding/json"
-	apimodel "github.com/Xrefullx/YanDip/server/api/model"
-	"github.com/Xrefullx/YanDip/server/model"
 	"io"
 	"log"
 	"net/http"
+
+	"github.com/Xrefullx/YanDip/server/model"
+
+	apimodel "github.com/Xrefullx/YanDip/server/api/model"
 )
 
 // 200 - if secret addedd or updated succefully

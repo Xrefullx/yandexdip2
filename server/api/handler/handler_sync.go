@@ -1,8 +1,9 @@
 package handler
 
 import (
-	apimodel "github.com/Xrefullx/YanDip/server/api/model"
 	"net/http"
+
+	apimodel "github.com/Xrefullx/YanDip/server/api/model"
 )
 
 func (h *Handler) SyncList(w http.ResponseWriter, r *http.Request) {

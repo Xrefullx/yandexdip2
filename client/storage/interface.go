@@ -1,8 +1,9 @@
 package storage
 
 import (
-	"github.com/Xrefullx/YanDip/client/model"
 	"github.com/google/uuid"
+
+	"github.com/Xrefullx/YanDip/client/model"
 )
 
 type Storage interface {

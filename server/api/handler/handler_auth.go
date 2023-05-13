@@ -4,11 +4,13 @@ import (
 	"encoding/json"
 	"errors"
 	"fmt"
-	apimodel "github.com/Xrefullx/YanDip/server/api/model"
-	"github.com/Xrefullx/YanDip/server/model"
-	"github.com/google/uuid"
 	"log"
 	"net/http"
+
+	"github.com/google/uuid"
+
+	apimodel "github.com/Xrefullx/YanDip/server/api/model"
+	"github.com/Xrefullx/YanDip/server/model"
 )
 
 // Register registers user, sets cookie with jwt token.

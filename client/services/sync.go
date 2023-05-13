@@ -2,15 +2,17 @@ package services
 
 import (
 	"context"
+	"log"
+	"sync"
+	"time"
+
+	"github.com/google/uuid"
+	"golang.org/x/time/rate"
+
 	"github.com/Xrefullx/YanDip/client/model"
 	"github.com/Xrefullx/YanDip/client/pkg"
 	"github.com/Xrefullx/YanDip/client/provider"
 	"github.com/Xrefullx/YanDip/client/storage"
-	"github.com/google/uuid"
-	"golang.org/x/time/rate"
-	"log"
-	"sync"
-	"time"
 )
 
 type SyncService struct {

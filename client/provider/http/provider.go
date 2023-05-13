@@ -2,11 +2,12 @@ package http
 
 import (
 	"fmt"
-	"github.com/Xrefullx/YanDip/client/provider"
 	"io"
 	"log"
 	"net/http"
 	"strings"
+
+	"github.com/Xrefullx/YanDip/client/provider"
 )
 
 var _ provider.SecretProvider = (*HTTPProvider)(nil)

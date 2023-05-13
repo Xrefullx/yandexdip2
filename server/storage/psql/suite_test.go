@@ -2,11 +2,13 @@ package psql
 
 import (
 	"context"
-	"github.com/Xrefullx/YanDip/server/storage/psql/migrations"
-	"github.com/Xrefullx/YanDip/server/storage/psql/testtool"
-	"github.com/stretchr/testify/suite"
 	"testing"
 	"time"
+
+	"github.com/stretchr/testify/suite"
+
+	"github.com/Xrefullx/YanDip/server/storage/psql/migrations"
+	"github.com/Xrefullx/YanDip/server/storage/psql/testtool"
 )
 
 const (

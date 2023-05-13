@@ -2,15 +2,17 @@ package handler
 
 import (
 	"bytes"
-	"github.com/Xrefullx/YanDip/server/services/auth"
-	"github.com/Xrefullx/YanDip/server/services/secret"
-	"github.com/go-chi/jwtauth/v5"
-	"github.com/stretchr/testify/assert"
-	"github.com/stretchr/testify/require"
 	"io"
 	"log"
 	"net/http/httptest"
 	"testing"
+
+	"github.com/go-chi/jwtauth/v5"
+	"github.com/stretchr/testify/assert"
+	"github.com/stretchr/testify/require"
+
+	"github.com/Xrefullx/YanDip/server/services/auth"
+	"github.com/Xrefullx/YanDip/server/services/secret"
 )
 
 // HandlerTest stores test data and expected response params.

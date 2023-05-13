@@ -3,10 +3,12 @@ package psql
 import (
 	"context"
 	"errors"
-	"github.com/Xrefullx/YanDip/server/model"
+	"math/rand"
+
 	"github.com/google/uuid"
 	"github.com/icrowley/fake"
-	"math/rand"
+
+	"github.com/Xrefullx/YanDip/server/model"
 )
 
 var user = model.User{

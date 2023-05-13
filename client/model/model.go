@@ -2,9 +2,11 @@ package model
 
 import (
 	"encoding/json"
-	"github.com/Xrefullx/YanDip/client/pkg"
-	"github.com/google/uuid"
 	"log"
+
+	"github.com/google/uuid"
+
+	"github.com/Xrefullx/YanDip/client/pkg"
 )
 
 var (

@@ -2,9 +2,11 @@ package auth
 
 import (
 	"context"
-	"github.com/Xrefullx/YanDip/server/model"
+
 	"github.com/go-chi/jwtauth/v5"
 	"github.com/google/uuid"
+
+	"github.com/Xrefullx/YanDip/server/model"
 )
 
 // Authenticator is the interface that wraps methods user identification, authentication, authorisation.

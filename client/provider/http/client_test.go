@@ -1,15 +1,16 @@
 package http
 
 import (
-	"github.com/icrowley/fake"
-	"github.com/stretchr/testify/assert"
-	"github.com/stretchr/testify/require"
 	"io"
 	"log"
 	"net/http"
 	"net/http/httptest"
 	"testing"
 	"time"
+
+	"github.com/icrowley/fake"
+	"github.com/stretchr/testify/assert"
+	"github.com/stretchr/testify/require"
 )
 
 func TestTokenClient_SetToken(t *testing.T) {

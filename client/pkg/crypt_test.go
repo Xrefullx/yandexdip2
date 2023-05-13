@@ -1,8 +1,9 @@
 package pkg
 
 import (
-	"github.com/stretchr/testify/require"
 	"testing"
+
+	"github.com/stretchr/testify/require"
 )
 
 func TestCard_Encrypt_Decrypt(t *testing.T) {

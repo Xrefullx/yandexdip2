@@ -3,12 +3,14 @@ package sqllte
 import (
 	"database/sql"
 	"errors"
-	"github.com/Xrefullx/YanDip/client/model"
-	"github.com/Xrefullx/YanDip/client/pkg"
-	"github.com/Xrefullx/YanDip/client/storage"
+
 	"github.com/google/uuid"
 	_ "github.com/mattn/go-sqlite3"
 	"log"
+
+	"github.com/Xrefullx/YanDip/client/model"
+	"github.com/Xrefullx/YanDip/client/pkg"
+	"github.com/Xrefullx/YanDip/client/storage"
 )
 
 var _ storage.Storage = (*Storage)(nil)

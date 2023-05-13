@@ -2,13 +2,15 @@ package http
 
 import (
 	"encoding/json"
-	"github.com/Xrefullx/YanDip/client/provider/http/model"
-	"github.com/google/uuid"
-	"github.com/icrowley/fake"
 	"log"
 	"math/rand"
 	"net/http"
 	"time"
+
+	"github.com/google/uuid"
+	"github.com/icrowley/fake"
+
+	"github.com/Xrefullx/YanDip/client/provider/http/model"
 )
 
 var (

@@ -4,10 +4,12 @@ import (
 	"context"
 	"database/sql"
 	"errors"
+	"log"
+
+	"github.com/google/uuid"
+
 	"github.com/Xrefullx/YanDip/server/model"
 	"github.com/Xrefullx/YanDip/server/storage"
-	"github.com/google/uuid"
-	"log"
 )
 
 var _ storage.SecretRepository = (*secretRepository)(nil)

@@ -3,8 +3,9 @@ package psql
 import (
 	"database/sql"
 	"fmt"
-	"github.com/Xrefullx/YanDip/server/storage"
 	"log"
+
+	"github.com/Xrefullx/YanDip/server/storage"
 )
 
 var _ storage.Storage = (*Storage)(nil)

@@ -1,12 +1,14 @@
 package services
 
 import (
-	"github.com/Xrefullx/YanDip/client/model"
-	"github.com/Xrefullx/YanDip/client/pkg"
-	"github.com/google/uuid"
-	"github.com/stretchr/testify/require"
 	"math/rand"
 	"testing"
+
+	"github.com/google/uuid"
+	"github.com/stretchr/testify/require"
+
+	"github.com/Xrefullx/YanDip/client/model"
+	"github.com/Xrefullx/YanDip/client/pkg"
 )
 
 var (

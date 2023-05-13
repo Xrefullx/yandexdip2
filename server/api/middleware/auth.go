@@ -3,11 +3,13 @@ package middleware
 import (
 	"context"
 	"errors"
-	"github.com/Xrefullx/YanDip/server/api/model"
+	"net/http"
+
 	"github.com/go-chi/jwtauth/v5"
 	"github.com/google/uuid"
 	"github.com/lestrrat-go/jwx/v2/jwt"
-	"net/http"
+
+	"github.com/Xrefullx/YanDip/server/api/model"
 )
 
 // MiddlewareAuth gets token from request, checks it and sets user_id to context

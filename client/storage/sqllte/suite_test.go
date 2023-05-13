@@ -1,9 +1,10 @@
 package sqllte
 
 import (
-	"github.com/stretchr/testify/suite"
 	"os"
 	"testing"
+
+	"github.com/stretchr/testify/suite"
 )
 
 const (

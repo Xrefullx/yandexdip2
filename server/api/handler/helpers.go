@@ -2,9 +2,10 @@ package handler
 
 import (
 	"encoding/json"
+	"net/http"
+
 	apimodel "github.com/Xrefullx/YanDip/server/api/model"
 	"github.com/Xrefullx/YanDip/server/model"
-	"net/http"
 )
 
 func (h *Handler) writeError(w http.ResponseWriter, err error) {

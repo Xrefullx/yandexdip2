@@ -4,13 +4,15 @@ import (
 	"context"
 	"errors"
 	"fmt"
+	"log"
+	"net/http"
+
+	"github.com/go-chi/jwtauth/v5"
+
 	"github.com/Xrefullx/YanDip/server/api/handler"
 	"github.com/Xrefullx/YanDip/server/pkg"
 	"github.com/Xrefullx/YanDip/server/services/auth"
 	"github.com/Xrefullx/YanDip/server/services/secret"
-	"github.com/go-chi/jwtauth/v5"
-	"log"
-	"net/http"
 )
 
 type Server struct {

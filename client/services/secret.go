@@ -3,14 +3,16 @@ package services
 import (
 	"encoding/json"
 	"errors"
-	"github.com/Xrefullx/YanDip/client/model"
-	"github.com/Xrefullx/YanDip/client/pkg"
-	"github.com/Xrefullx/YanDip/client/storage"
-	"github.com/google/uuid"
 	"io/ioutil"
 	"log"
 	"net/http"
 	"path/filepath"
+
+	"github.com/google/uuid"
+
+	"github.com/Xrefullx/YanDip/client/model"
+	"github.com/Xrefullx/YanDip/client/pkg"
+	"github.com/Xrefullx/YanDip/client/storage"
 )
 
 type SecretService struct {

@@ -4,11 +4,12 @@ import (
 	"bytes"
 	"encoding/json"
 	"fmt"
-	"github.com/Xrefullx/YanDip/client/provider/http/model"
-	"github.com/google/uuid"
 	"io"
 	"log"
 	"net/http"
+
+	"github.com/Xrefullx/YanDip/client/provider/http/model"
+	"github.com/google/uuid"
 )
 
 func (p *HTTPProvider) Authorise(login string, pass string, masterHash string, deviceID uuid.UUID) error {

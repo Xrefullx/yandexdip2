@@ -3,18 +3,21 @@ package main
 import (
 	"context"
 	"errors"
+
+	"log"
+	"net/http"
+	"os"
+	"os/signal"
+	"time"
+
+	"github.com/go-chi/jwtauth/v5"
+
 	"github.com/Xrefullx/YanDip/server/api"
 	"github.com/Xrefullx/YanDip/server/pkg"
 	"github.com/Xrefullx/YanDip/server/services/auth"
 	"github.com/Xrefullx/YanDip/server/services/secret"
 	"github.com/Xrefullx/YanDip/server/storage/psql"
 	"github.com/Xrefullx/YanDip/server/storage/psql/migrations"
-	"github.com/go-chi/jwtauth/v5"
-	"log"
-	"net/http"
-	"os"
-	"os/signal"
-	"time"
 )
 
 func main() {

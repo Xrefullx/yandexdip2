@@ -4,15 +4,17 @@ import (
 	"encoding/json"
 	"errors"
 	"fmt"
-	apimodel "github.com/Xrefullx/YanDip/server/api/model"
-	"github.com/Xrefullx/YanDip/server/model"
-	mk "github.com/Xrefullx/YanDip/server/services/auth/mock"
-	"github.com/golang/mock/gomock"
-	"github.com/google/uuid"
-	"github.com/icrowley/fake"
 	"log"
 	"net/http"
 	"testing"
+
+	"github.com/golang/mock/gomock"
+	"github.com/google/uuid"
+	"github.com/icrowley/fake"
+
+	apimodel "github.com/Xrefullx/YanDip/server/api/model"
+	"github.com/Xrefullx/YanDip/server/model"
+	mk "github.com/Xrefullx/YanDip/server/services/auth/mock"
 )
 
 var (

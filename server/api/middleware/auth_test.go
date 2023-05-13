@@ -2,14 +2,16 @@ package middleware
 
 import (
 	"encoding/json"
-	"github.com/Xrefullx/YanDip/server/api/model"
-	"github.com/Xrefullx/YanDip/server/services/auth"
-	"github.com/go-chi/jwtauth/v5"
-	"github.com/google/uuid"
-	"github.com/stretchr/testify/require"
 	"log"
 	"net/http"
 	"testing"
+
+	"github.com/go-chi/jwtauth/v5"
+	"github.com/google/uuid"
+	"github.com/stretchr/testify/require"
+
+	"github.com/Xrefullx/YanDip/server/api/model"
+	"github.com/Xrefullx/YanDip/server/services/auth"
 )
 
 // TestHandler_Login tests user register handler

@@ -3,11 +3,13 @@ package http
 import (
 	"encoding/json"
 	"fmt"
-	"github.com/Xrefullx/YanDip/client/provider/http/model"
-	"github.com/google/uuid"
 	"io"
 	"log"
 	"net/http"
+
+	"github.com/google/uuid"
+
+	"github.com/Xrefullx/YanDip/client/provider/http/model"
 )
 
 // GetSyncList downloads files meta info from server

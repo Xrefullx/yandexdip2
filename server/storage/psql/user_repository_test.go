@@ -2,9 +2,11 @@ package psql
 
 import (
 	"errors"
-	"github.com/Xrefullx/YanDip/server/model"
+
 	"github.com/google/uuid"
 	"github.com/icrowley/fake"
+
+	"github.com/Xrefullx/YanDip/server/model"
 )
 
 func (s *TestSuite) TestUsers_CreateUser() {

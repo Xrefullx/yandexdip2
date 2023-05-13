@@ -3,10 +3,12 @@ package secret
 import (
 	"context"
 	"fmt"
+	"log"
+
+	"github.com/google/uuid"
+
 	"github.com/Xrefullx/YanDip/server/model"
 	"github.com/Xrefullx/YanDip/server/storage"
-	"github.com/google/uuid"
-	"log"
 )
 
 var _ SecretManager = (*Secret)(nil)

@@ -4,11 +4,13 @@ import (
 	"context"
 	"errors"
 	"fmt"
-	"github.com/Xrefullx/YanDip/server/model"
-	"github.com/Xrefullx/YanDip/server/storage"
+
 	"github.com/go-chi/jwtauth/v5"
 	"github.com/google/uuid"
 	"golang.org/x/crypto/bcrypt"
+
+	"github.com/Xrefullx/YanDip/server/model"
+	"github.com/Xrefullx/YanDip/server/storage"
 )
 
 var _ Authenticator = (*Auth)(nil)

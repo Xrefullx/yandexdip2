@@ -1,14 +1,16 @@
 package http
 
 import (
-	"github.com/Xrefullx/YanDip/client/provider/http/model"
+	"net/http"
+	"testing"
+	"time"
+
 	"github.com/google/uuid"
 	"github.com/icrowley/fake"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
-	"net/http"
-	"testing"
-	"time"
+
+	"github.com/Xrefullx/YanDip/client/provider/http/model"
 )
 
 func TestProviderSync_GetList(t *testing.T) {

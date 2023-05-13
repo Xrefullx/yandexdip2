@@ -1,13 +1,15 @@
 package handler
 
 import (
-	apimiddleware "github.com/Xrefullx/YanDip/server/api/middleware"
-	"github.com/Xrefullx/YanDip/server/services/auth"
-	"github.com/Xrefullx/YanDip/server/services/secret"
+	"net/http"
+
 	"github.com/go-chi/chi/v5"
 	"github.com/go-chi/chi/v5/middleware"
 	"github.com/go-chi/jwtauth/v5"
-	"net/http"
+
+	apimiddleware "github.com/Xrefullx/YanDip/server/api/middleware"
+	"github.com/Xrefullx/YanDip/server/services/auth"
+	"github.com/Xrefullx/YanDip/server/services/secret"
 )
 
 type Handler struct {

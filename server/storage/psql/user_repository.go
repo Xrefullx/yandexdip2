@@ -4,11 +4,13 @@ import (
 	"context"
 	"database/sql"
 	"errors"
-	"github.com/Xrefullx/YanDip/server/model"
-	"github.com/Xrefullx/YanDip/server/storage"
+
 	"github.com/google/uuid"
 	"github.com/jackc/pgerrcode"
 	"github.com/lib/pq"
+
+	"github.com/Xrefullx/YanDip/server/model"
+	"github.com/Xrefullx/YanDip/server/storage"
 )
 
 var _ storage.UserRepository = (*userRepository)(nil)

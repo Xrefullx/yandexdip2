@@ -3,17 +3,19 @@ package main
 import (
 	"context"
 	"fmt"
+	"log"
+	"os"
+	"os/signal"
+	"time"
+
+	"github.com/rivo/tview"
+
 	"github.com/Xrefullx/YanDip/client/model"
 	"github.com/Xrefullx/YanDip/client/pkg"
 	"github.com/Xrefullx/YanDip/client/provider/http"
 	"github.com/Xrefullx/YanDip/client/services"
 	"github.com/Xrefullx/YanDip/client/storage/sqllte"
 	"github.com/Xrefullx/YanDip/client/tui"
-	"github.com/rivo/tview"
-	"log"
-	"os"
-	"os/signal"
-	"time"
 )
 
 var app = tview.NewApplication()

@@ -5,12 +5,13 @@ import (
 	"encoding/json"
 	"errors"
 	"fmt"
-	"github.com/Xrefullx/YanDip/client/model"
-	prmodel "github.com/Xrefullx/YanDip/client/provider/http/model"
-	"github.com/google/uuid"
 	"io"
 	"log"
 	"net/http"
+
+	"github.com/Xrefullx/YanDip/client/model"
+	prmodel "github.com/Xrefullx/YanDip/client/provider/http/model"
+	"github.com/google/uuid"
 )
 
 // UploadSecret uploads secret to server, returns server id and version
