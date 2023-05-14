@@ -3,6 +3,7 @@ package main
 import (
 	"context"
 	"errors"
+	"github.com/Xrefullx/YanDip/server/services/logpkg"
 
 	"log"
 	"net/http"
@@ -21,7 +22,7 @@ import (
 )
 
 func main() {
-
+	logpkg.InitLogger("logfile.log")
 	cfg, err := pkg.NewConfig()
 	if err != nil {
 		log.Fatal(err.Error())
@@ -78,5 +79,6 @@ func main() {
 	if err := server.Shutdown(ctxShutdown); err != nil {
 		log.Fatalf("error shutdown server: %s\n", err.Error())
 	}
+	defer logpkg.CloseLogger()
 
 }

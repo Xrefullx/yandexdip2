@@ -4,11 +4,10 @@ import (
 	"context"
 	"database/sql"
 	"errors"
-	"log"
-
 	"github.com/google/uuid"
 
 	"github.com/Xrefullx/YanDip/server/model"
+	"github.com/Xrefullx/YanDip/server/services/logpkg"
 	"github.com/Xrefullx/YanDip/server/storage"
 )
 
@@ -40,7 +39,7 @@ func (r *secretRepository) Add(ctx context.Context, secret model.Secret) (uuid.U
 	)
 
 	if err != nil {
-		log.Println(err.Error()) // log error before returning it
+		logpkg.ErrorLog(err.Error())
 		return uuid.Nil, err
 	}
 
@@ -63,6 +62,7 @@ func (r *secretRepository) Get(ctx context.Context, id uuid.UUID, userID uuid.UU
 			return model.Secret{}, model.ErrorItemNotFound
 		}
 
+		logpkg.ErrorLog(err.Error())
 		return model.Secret{}, err
 	}
 
@@ -78,25 +78,25 @@ func (r *secretRepository) Update(ctx context.Context, el model.Secret) error {
 
 	stmt, err := r.db.Prepare(query)
 	if err != nil {
-		log.Println(err.Error())
+		logpkg.ErrorLog(err.Error())
 		return err
 	}
 
 	res, err := stmt.ExecContext(ctx, el.ID, el.Ver, el.UserID, el.Data, el.IsDeleted)
 	if err != nil {
-		log.Println(err.Error())
+		logpkg.ErrorLog(err.Error())
 		return err
 	}
 
 	exists, err := res.RowsAffected()
 	if err != nil {
-		log.Println(err.Error())
+		logpkg.ErrorLog(err.Error())
 		return err
 	}
 
 	if exists == 0 {
 		err = model.ErrorItemNotFound
-		log.Println(err.Error())
+		logpkg.ErrorLog(err.Error())
 		return err
 	}
 
@@ -112,25 +112,25 @@ func (r *secretRepository) Delete(ctx context.Context, id uuid.UUID, userID uuid
 
 	stmt, err := r.db.Prepare(query)
 	if err != nil {
-		log.Println(err.Error())
+		logpkg.ErrorLog(err.Error())
 		return err
 	}
 
 	res, err := stmt.ExecContext(ctx, id, userID, true)
 	if err != nil {
-		log.Println(err.Error())
+		logpkg.ErrorLog(err.Error())
 		return err
 	}
 
 	exists, err := res.RowsAffected()
 	if err != nil {
-		log.Println(err.Error())
+		logpkg.ErrorLog(err.Error())
 		return err
 	}
 
 	if exists == 0 {
 		err = model.ErrorItemNotFound
-		log.Println(err.Error())
+		logpkg.ErrorLog(err.Error())
 		return err
 	}
 
@@ -147,7 +147,7 @@ func (r *secretRepository) GetUserVersionList(ctx context.Context, userID uuid.U
 
 	defer func() {
 		if err := rows.Close(); err != nil {
-			log.Println(err.Error())
+			logpkg.ErrorLog(err.Error())
 		}
 	}()
 
@@ -167,6 +167,7 @@ func (r *secretRepository) GetUserVersionList(ctx context.Context, userID uuid.U
 
 	err = rows.Err()
 	if err != nil {
+		logpkg.ErrorLog(err.Error())
 		return nil, err
 	}
 
