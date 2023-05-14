@@ -2,23 +2,29 @@ package model
 
 import (
 	"fmt"
-
+	"github.com/go-playground/validator/v10"
 	"github.com/google/uuid"
 )
+
+var validate *validator.Validate
+
+func init() {
+	validate = validator.New()
+}
 
 type (
 	User struct {
 		ID           uuid.UUID
-		Login        string
-		PasswordHash string
-		MasterHash   string
+		Login        string `validate:"required,min=3,max=60"`
+		PasswordHash string `validate:"required"`
+		MasterHash   string `validate:"required"`
 	}
 
 	Secret struct {
-		ID        uuid.UUID
-		Ver       int
-		UserID    uuid.UUID
-		Data      string
+		ID        uuid.UUID `validate:"required"`
+		Ver       int       `validate:"required,min=1"`
+		UserID    uuid.UUID `validate:"required"`
+		Data      string    `validate:"required_without=IsDeleted"`
 		IsDeleted bool
 	}
 )
@@ -27,17 +33,10 @@ func (s *Secret) ValidateAdd() error {
 	if s.ID != uuid.Nil {
 		return fmt.Errorf("%w: id not nil", ErrorParamNotValid)
 	}
-	if s.Ver != 1 {
-		return fmt.Errorf("%w: version not 0", ErrorParamNotValid)
-	}
-	if s.UserID == uuid.Nil {
-		return fmt.Errorf("%w: user id is nil", ErrorParamNotValid)
-	}
-	if len(s.Data) == 0 {
-		return fmt.Errorf("%w: data is empty", ErrorParamNotValid)
-	}
-	if s.IsDeleted {
-		return fmt.Errorf("%w: is deleted", ErrorParamNotValid)
+
+	err := validate.Struct(s)
+	if err != nil {
+		return fmt.Errorf("%w: %v", ErrorParamNotValid, err)
 	}
 
 	return nil
@@ -47,22 +46,20 @@ func (s *Secret) ValidateUpdate() error {
 	if s.ID == uuid.Nil {
 		return fmt.Errorf("%w: id is nil", ErrorParamNotValid)
 	}
-	if s.UserID == uuid.Nil {
-		return fmt.Errorf("%w: user id is nil", ErrorParamNotValid)
-	}
-	if s.Ver == 0 {
-		return fmt.Errorf("%w: version is 0", ErrorParamNotValid)
-	}
-	if !s.IsDeleted && len(s.Data) == 0 {
-		return fmt.Errorf("%w: data is empty", ErrorParamNotValid)
+
+	err := validate.Struct(s)
+	if err != nil {
+		return fmt.Errorf("%w: %v", ErrorParamNotValid, err)
 	}
 
 	return nil
 }
 
-func (u User) ValidateLogin(login string) error {
-	if len(login) < 3 && len(login) > 60 {
+func (u *User) ValidateLogin() error {
+	err := validate.Var(u.Login, "required,min=3,max=60")
+	if err != nil {
 		return fmt.Errorf("%w: login not valid", ErrorParamNotValid)
 	}
+
 	return nil
 }
