@@ -37,12 +37,12 @@ func NewAuth(s storage.Storage) (*Auth, error) {
 func (a *Auth) CreateUser(ctx context.Context, login string, password string, masterHash string) (model.User, error) {
 	loginHash, err := bcrypt.GenerateFromPassword([]byte(password+salt), 10)
 	if err != nil {
-		return model.User{}, fmt.Errorf("ошибка добавления пользователя: %w", err)
+		return model.User{}, fmt.Errorf("%w: %v", model.ErrAddingUser, err)
 	}
 
 	masterHashHash, err := bcrypt.GenerateFromPassword([]byte(masterHash+salt), 10)
 	if err != nil {
-		return model.User{}, fmt.Errorf("ошибка добавления пользователя: %w", err)
+		return model.User{}, fmt.Errorf("%w: %v", model.ErrAddingUser, err)
 	}
 
 	user := model.User{
@@ -53,7 +53,7 @@ func (a *Auth) CreateUser(ctx context.Context, login string, password string, ma
 
 	user, err = a.storage.User().Create(ctx, user)
 	if err != nil {
-		return model.User{}, fmt.Errorf("ошибка добавления пользователя: %w", err)
+		return model.User{}, fmt.Errorf("%w: %v", model.ErrAddingUser, err)
 	}
 
 	return user, err
@@ -68,7 +68,7 @@ func (a *Auth) Authenticate(ctx context.Context, login string, password string, 
 			return model.User{}, model.ErrorWrongAuthData
 		}
 
-		return model.User{}, fmt.Errorf("ошибка авторизации пользователя: %w", err)
+		return model.User{}, fmt.Errorf("%w: %v", model.ErrAuthenticatingUser, err)
 	}
 
 	if err := bcrypt.CompareHashAndPassword([]byte(user.PasswordHash), []byte(password+salt)); err != nil {
@@ -89,7 +89,7 @@ func (a Auth) EncodeTokenUserID(userID uuid.UUID, deviceID uuid.UUID, tokenAuth 
 		"device_id": deviceID.String(),
 	})
 	if err != nil {
-		return "", fmt.Errorf("ошибка генерации токена для пользователя: %w", err)
+		return "", fmt.Errorf("%w: %v", model.ErrGeneratingToken, err)
 	}
 
 	return tokenString, nil

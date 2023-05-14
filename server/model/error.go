@@ -10,4 +10,8 @@ var (
 	ErrorVersionToLow  = errors.New("version of data to low")
 	ErrorItemIsDeleted = errors.New("element is deleted")
 	ErrorParamNotValid = errors.New("incoming parameter not valid")
+
+	ErrAddingUser         = errors.New("ошибка добавления пользователя")
+	ErrAuthenticatingUser = errors.New("ошибка авторизации пользователя")
+	ErrGeneratingToken    = errors.New("ошибка генерации токена для пользователя")
 )
