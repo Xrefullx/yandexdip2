@@ -74,7 +74,7 @@ func (h *Handler) SecretDelete(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	_, err := h.svcSecret.Delete(r.Context(), req.ID, user.UserID)
+	err := h.svcSecret.Delete(r.Context(), req.ID, user.UserID)
 	if err != nil {
 		h.writeError(w, err)
 		return

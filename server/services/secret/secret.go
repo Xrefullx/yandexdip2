@@ -17,9 +17,9 @@ type Secret struct {
 	storage storage.SecretRepository
 }
 
-func NewSecret(r storage.SecretRepository) (*Secret, error) {
+func NewSecret(s storage.Storage) (*Secret, error) {
 	return &Secret{
-		storage: r,
+		storage: s.Secret(),
 	}, nil
 }
 
@@ -66,17 +66,12 @@ func (s *Secret) Update(ctx context.Context, secret model.Secret) (uuid.UUID, in
 	return dbSecret.ID, dbSecret.Ver, nil
 }
 
-func (s *Secret) Delete(ctx context.Context, id uuid.UUID, userID uuid.UUID) (model.Secret, error) {
+func (s *Secret) Delete(ctx context.Context, id uuid.UUID, userID uuid.UUID) error {
 	if id == uuid.Nil {
-		return model.Secret{}, fmt.Errorf("%w: id is nil", model.ErrorParamNotValid)
+		return fmt.Errorf("%w: id is nil", model.ErrorParamNotValid)
 	}
 
-	err := s.storage.Delete(ctx, id, userID)
-	if err != nil {
-		return model.Secret{}, err
-	}
-
-	return model.Secret{}, nil
+	return s.storage.Delete(ctx, id, userID)
 }
 
 func (s *Secret) Get(ctx context.Context, id uuid.UUID, userID uuid.UUID) (model.Secret, error) {

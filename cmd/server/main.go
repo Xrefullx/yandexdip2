@@ -3,7 +3,6 @@ package main
 import (
 	"context"
 	"errors"
-	"github.com/Xrefullx/YanDip/server/services/logpkg"
 
 	"log"
 	"net/http"
@@ -16,6 +15,7 @@ import (
 	"github.com/Xrefullx/YanDip/server/api"
 	"github.com/Xrefullx/YanDip/server/pkg"
 	"github.com/Xrefullx/YanDip/server/services/auth"
+	"github.com/Xrefullx/YanDip/server/services/logpkg"
 	"github.com/Xrefullx/YanDip/server/services/secret"
 	"github.com/Xrefullx/YanDip/server/storage/psql"
 	"github.com/Xrefullx/YanDip/server/storage/psql/migrations"

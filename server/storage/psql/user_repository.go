@@ -55,7 +55,7 @@ func (u *userRepository) Create(ctx context.Context, user model.User) (model.Use
 //		if not found, returns ErrorItemNotFound
 func (u *userRepository) GetByLogin(ctx context.Context, login string) (model.User, error) {
 	var user model.User
-	if err := user.ValidateLogin(login); err != nil {
+	if err := user.ValidateLogin(); err != nil {
 		return model.User{}, err
 	}
 
