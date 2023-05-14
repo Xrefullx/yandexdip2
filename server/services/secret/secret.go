@@ -14,12 +14,12 @@ import (
 var _ SecretManager = (*Secret)(nil)
 
 type Secret struct {
-	storage storage.Storage
+	storage storage.SecretRepository
 }
 
-func NewSecret(s storage.Storage) (*Secret, error) {
+func NewSecret(r storage.SecretRepository) (*Secret, error) {
 	return &Secret{
-		storage: s,
+		storage: r,
 	}, nil
 }
 
@@ -29,20 +29,19 @@ func (s *Secret) Add(ctx context.Context, secret model.Secret) (uuid.UUID, int, 
 		return uuid.Nil, 0, fmt.Errorf("secret not valid to add: %w", err)
 	}
 
-	id, err := s.storage.Secret().Add(ctx, secret)
+	id, err := s.storage.Add(ctx, secret)
 	if err != nil {
 		return uuid.Nil, 0, err
 	}
 
 	return id, secret.Ver, nil
 }
-
 func (s *Secret) Update(ctx context.Context, secret model.Secret) (uuid.UUID, int, error) {
 	if err := secret.ValidateUpdate(); err != nil {
 		return uuid.Nil, 0, fmt.Errorf("secret not valid to update: %w", err)
 	}
 
-	dbSecret, err := s.storage.Secret().Get(ctx, secret.ID, secret.UserID)
+	dbSecret, err := s.storage.Get(ctx, secret.ID, secret.UserID)
 	if err != nil {
 		return uuid.Nil, 0, err
 	}
@@ -60,7 +59,7 @@ func (s *Secret) Update(ctx context.Context, secret model.Secret) (uuid.UUID, in
 	dbSecret.Data = secret.Data
 	dbSecret.Ver = dbSecret.Ver + 1
 
-	if err := s.storage.Secret().Update(ctx, dbSecret); err != nil {
+	if err := s.storage.Update(ctx, dbSecret); err != nil {
 		return uuid.Nil, 0, err
 	}
 
@@ -72,7 +71,7 @@ func (s *Secret) Delete(ctx context.Context, id uuid.UUID, userID uuid.UUID) (mo
 		return model.Secret{}, fmt.Errorf("%w: id is nil", model.ErrorParamNotValid)
 	}
 
-	err := s.storage.Secret().Delete(ctx, id, userID)
+	err := s.storage.Delete(ctx, id, userID)
 	if err != nil {
 		return model.Secret{}, err
 	}
@@ -85,12 +84,12 @@ func (s *Secret) Get(ctx context.Context, id uuid.UUID, userID uuid.UUID) (model
 		return model.Secret{}, fmt.Errorf("%w: id is nil", model.ErrorParamNotValid)
 	}
 
-	return s.storage.Secret().Get(ctx, id, userID)
+	return s.storage.Get(ctx, id, userID)
 }
 
 func (s *Secret) GetUserSyncList(ctx context.Context, userID uuid.UUID) (map[uuid.UUID]int, error) {
 	if userID == uuid.Nil {
 		return nil, fmt.Errorf("%w: userr id is nil", model.ErrorParamNotValid)
 	}
-	return s.storage.Secret().GetUserVersionList(ctx, userID)
+	return s.storage.GetUserVersionList(ctx, userID)
 }
