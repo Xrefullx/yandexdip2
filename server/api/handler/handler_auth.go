@@ -79,19 +79,17 @@ func (h *Handler) Login(w http.ResponseWriter, r *http.Request) {
 func (h Handler) readLoginRequest(w http.ResponseWriter, r *http.Request) (apimodel.LoginRequest, error) {
 	var loginData apimodel.LoginRequest
 	if err := json.NewDecoder(r.Body).Decode(&loginData); err != nil {
-		http.Error(w, err.Error(), http.StatusBadRequest)
-		return apimodel.LoginRequest{}, fmt.Errorf("wrong data format")
+		return apimodel.LoginRequest{}, fmt.Errorf("wrong data format: %v", err)
 	}
 
 	defer func() {
 		if err := r.Body.Close(); err != nil {
-			log.Println(err.Error())
+			log.Println("Error closing request body:", err)
 		}
 	}()
 
 	if err := loginData.Validate(); err != nil {
-		http.Error(w, err.Error(), http.StatusBadRequest)
-		return apimodel.LoginRequest{}, fmt.Errorf("wrong data format")
+		return apimodel.LoginRequest{}, fmt.Errorf("invalid login data: %v", err)
 	}
 
 	return loginData, nil

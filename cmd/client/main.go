@@ -43,14 +43,19 @@ func main() {
 	}
 	defer db.Close()
 	provider := http.NewHTTPProvider(provCfg)
-	secretService := services.NewSecret(cfg, db)
-	svcSecret := &secretService
 	svcSync := services.NewSyncService(db, provider, cfg)
 	if err := svcSync.Run(context.Background()); err != nil {
 		log.Fatal(err)
 	}
-	//  run tui
-	tui.SetQ(app, svcSecret)
+	secretService := services.NewSecret(cfg, db)
+
+	app := tview.NewApplication()
+	tui := tui.NewTUI(app, secretService)
+
+	if err := tui.SetQ(); err != nil {
+		log.Fatalf("Failed to set queue: %v", err)
+	}
+
 	sigc := make(chan os.Signal, 1)
 	signal.Notify(sigc, os.Interrupt)
 	<-sigc
