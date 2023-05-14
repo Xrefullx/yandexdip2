@@ -67,25 +67,17 @@ func (s *Secret) Update(ctx context.Context, secret model.Secret) (uuid.UUID, in
 	return dbSecret.ID, dbSecret.Ver, nil
 }
 
-func (s *Secret) Delete(ctx context.Context, id uuid.UUID, userID uuid.UUID) error {
-
+func (s *Secret) Delete(ctx context.Context, id uuid.UUID, userID uuid.UUID) (model.Secret, error) {
 	if id == uuid.Nil {
-		return fmt.Errorf("%w: id is nil", model.ErrorParamNotValid)
+		return model.Secret{}, fmt.Errorf("%w: id is nil", model.ErrorParamNotValid)
 	}
 
-	dbSecret, err := s.storage.Secret().Get(ctx, id, userID)
+	err := s.storage.Secret().Delete(ctx, id, userID)
 	if err != nil {
-		return err
+		return model.Secret{}, err
 	}
 
-	dbSecret.IsDeleted = true
-	dbSecret.Ver = dbSecret.Ver + 1
-
-	if err := s.storage.Secret().Update(ctx, dbSecret); err != nil {
-		return err
-	}
-
-	return nil
+	return model.Secret{}, nil
 }
 
 func (s *Secret) Get(ctx context.Context, id uuid.UUID, userID uuid.UUID) (model.Secret, error) {
