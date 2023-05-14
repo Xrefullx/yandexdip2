@@ -23,23 +23,21 @@ func NewSecret(s storage.Storage) (*Secret, error) {
 	}, nil
 }
 
-func (s *Secret) AddUpdate(ctx context.Context, secret model.Secret) (uuid.UUID, int, error) {
-	//  add if id is nil
+func (s *Secret) Add(ctx context.Context, secret model.Secret) (uuid.UUID, int, error) {
 	log.Printf("add secret %+v", secret)
-	if secret.ID == uuid.Nil {
-		if err := secret.ValidateAdd(); err != nil {
-			return uuid.Nil, 0, fmt.Errorf("secret not valid to add: %w", err)
-		}
-
-		id, err := s.storage.Secret().Add(ctx, secret)
-		if err != nil {
-			return uuid.Nil, 0, err
-		}
-
-		return id, secret.Ver, nil
+	if err := secret.ValidateAdd(); err != nil {
+		return uuid.Nil, 0, fmt.Errorf("secret not valid to add: %w", err)
 	}
 
-	//  update
+	id, err := s.storage.Secret().Add(ctx, secret)
+	if err != nil {
+		return uuid.Nil, 0, err
+	}
+
+	return id, secret.Ver, nil
+}
+
+func (s *Secret) Update(ctx context.Context, secret model.Secret) (uuid.UUID, int, error) {
 	if err := secret.ValidateUpdate(); err != nil {
 		return uuid.Nil, 0, fmt.Errorf("secret not valid to update: %w", err)
 	}

@@ -2,6 +2,7 @@ package handler
 
 import (
 	"encoding/json"
+	"github.com/google/uuid"
 	"io"
 	"log"
 	"net/http"
@@ -31,10 +32,24 @@ func (h *Handler) SecretUpload(w http.ResponseWriter, r *http.Request) {
 		IsDeleted: false,
 	}
 
-	id, ver, err := h.svcSecret.AddUpdate(r.Context(), secret)
-	if err != nil {
-		h.writeError(w, err)
-		return
+	var id uuid.UUID
+	var ver int
+	var err error
+
+	if secret.ID == uuid.Nil {
+		// Если ID не установлен, это новый секрет
+		id, ver, err = h.svcSecret.Add(r.Context(), secret)
+		if err != nil {
+			h.writeError(w, err)
+			return
+		}
+	} else {
+		// Если ID установлен, это обновление существующего секрета
+		id, ver, err = h.svcSecret.Update(r.Context(), secret)
+		if err != nil {
+			h.writeError(w, err)
+			return
+		}
 	}
 
 	resp := apimodel.SecretRequest{
