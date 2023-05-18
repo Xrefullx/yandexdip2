@@ -2,8 +2,10 @@ package secret
 
 import (
 	"context"
-	"github.com/Xrefullx/YanDip/server/model"
+
 	"github.com/google/uuid"
+
+	"github.com/Xrefullx/YanDip/server/model"
 )
 
 type SecretManager interface {
