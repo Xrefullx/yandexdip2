@@ -45,12 +45,12 @@ func main() {
 
 	jwtAuth := jwtauth.New("HS256", []byte("secret"), nil)
 
-	svcAuth, err := auth.NewAuth(db)
+	svcAuth, err := auth.NewAuth(db.UserRepo)
 	if err != nil {
 		log.Fatalf("error starting auth service:%v", err.Error())
 	}
 
-	svcSecret, err := secret.NewSecret(db)
+	svcSecret, err := secret.NewSecret(db.SecretRepo)
 	if err != nil {
 		log.Fatalf("error starting secret service:%v", err.Error())
 	}

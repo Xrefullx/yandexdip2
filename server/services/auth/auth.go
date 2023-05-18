@@ -21,14 +21,13 @@ const (
 
 // Auth implements Authenticator interface methods for user authorisation.
 type Auth struct {
-	//tokenAuth *jwtauth.JWTAuth
-	storage storage.Storage
+	userRepo storage.UserRepository
 }
 
 // NewAuth init new Auth.
-func NewAuth(s storage.Storage) (*Auth, error) {
+func NewAuth(repo storage.UserRepository) (*Auth, error) {
 	return &Auth{
-		storage: s,
+		userRepo: repo,
 	}, nil
 }
 
@@ -51,7 +50,7 @@ func (a *Auth) CreateUser(ctx context.Context, login string, password string, ma
 		MasterHash:   string(masterHashHash),
 	}
 
-	user, err = a.storage.User().Create(ctx, user)
+	user, err = a.userRepo.Create(ctx, user)
 	if err != nil {
 		return model.User{}, fmt.Errorf("%w: %v", model.ErrAddingUser, err)
 	}
@@ -62,7 +61,7 @@ func (a *Auth) CreateUser(ctx context.Context, login string, password string, ma
 // Authenticate checks user login, password and return.
 // If user not founded, or wrong password, returns ErrorWrongAuthData.
 func (a *Auth) Authenticate(ctx context.Context, login string, password string, masterHash string) (model.User, error) {
-	user, err := a.storage.User().GetByLogin(ctx, login)
+	user, err := a.userRepo.GetByLogin(ctx, login)
 	if err != nil {
 		if errors.Is(err, model.ErrorItemNotFound) {
 			return model.User{}, model.ErrorWrongAuthData

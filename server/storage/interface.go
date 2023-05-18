@@ -8,13 +8,6 @@ import (
 	"github.com/Xrefullx/YanDip/server/model"
 )
 
-type Storage interface {
-	//  User returns repository for working with users.
-	User() UserRepository
-	//  Order returns repository for working with orders.
-	Secret() SecretRepository
-}
-
 type UserRepository interface {
 	//  Adds new user to storage
 	Create(ctx context.Context, user model.User) (model.User, error)

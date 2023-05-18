@@ -11,15 +11,13 @@ import (
 	"github.com/Xrefullx/YanDip/server/storage"
 )
 
-var _ SecretManager = (*Secret)(nil)
-
 type Secret struct {
 	storage storage.SecretRepository
 }
 
-func NewSecret(s storage.Storage) (*Secret, error) {
+func NewSecret(repo storage.SecretRepository) (*Secret, error) {
 	return &Secret{
-		storage: s.Secret(),
+		storage: repo,
 	}, nil
 }
 

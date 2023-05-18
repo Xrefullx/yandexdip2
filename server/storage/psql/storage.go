@@ -8,11 +8,9 @@ import (
 	"github.com/Xrefullx/YanDip/server/storage"
 )
 
-var _ storage.Storage = (*Storage)(nil)
-
 type Storage struct {
-	secretRepo   *secretRepository
-	userRepo     *userRepository
+	SecretRepo   *secretRepository
+	UserRepo     *userRepository
 	db           *sql.DB
 	conStringDSN string
 }
@@ -38,20 +36,20 @@ func NewStorage(dsn string) (*Storage, error) {
 		conStringDSN: dsn,
 	}
 
-	st.secretRepo = newSecretRepository(db)
-	st.userRepo = newUserRepository(db)
+	st.SecretRepo = newSecretRepository(db)
+	st.UserRepo = newUserRepository(db)
 
 	return st, nil
 }
 
 // User returns users repository.
 func (s *Storage) User() storage.UserRepository {
-	return s.userRepo
+	return s.UserRepo
 }
 
 // Secret returns users repository.
 func (s *Storage) Secret() storage.SecretRepository {
-	return s.secretRepo
+	return s.SecretRepo
 }
 
 // Close  closes database connection.
